@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const req = require('express/lib/request');
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -11,3 +12,4 @@ router.get('/', (req,res) => {
      });
 });
 
+router.post('/', withAuth, (req, res) => {})
