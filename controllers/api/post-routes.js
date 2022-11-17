@@ -2,9 +2,6 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const sequelize = require('../..config/connection');
 const withAuth = require('../../utils/auth.js');
-const req = require('express/lib/request');
-const res = require('express/lib/response');
-const command = require('nodemon/lib/config/command');
 
 // get all users
 router.get('/', (req, res) => {
@@ -18,6 +15,7 @@ router.get('/', (req, res) => {
         ],
     order: [['created_at', 'DESC']],
     include: [
+     // Comment model here -- attached username to comment    
         {
             model: Comment,
             attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
@@ -52,6 +50,10 @@ router.get('/:id', (req, res) => {
         ],
         include: [
             // Comment model here -- attached username to comment
+            {
+                model: User,
+                attributes: ['username', 'twitter', 'github']
+            },
             {
                 model: Comment,
                 attributes: ['id', 'title', 'created_at', 'post_content'],
