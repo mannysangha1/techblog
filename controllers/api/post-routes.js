@@ -90,3 +90,6 @@ router.post('/', withAuth, (res, req) => {
         });
 });
 
+router.put('/:id', withAuth, (req, res) => {
+    
+})
