@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const sequelize = require('../..config/connection');
 const withAuth = require('../../utils/auth.js');
+const { route } = require('express/lib/application');
 
 // get all users
 router.get('/', (req, res) => {
@@ -112,3 +113,7 @@ router.put('/:id', withAuth, (req, res) => {
         res.status(500).json(err);
     });
 });
+
+router.delete('/:id', withAuth, (reg, res) => {
+    
+})
