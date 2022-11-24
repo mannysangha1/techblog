@@ -3,6 +3,7 @@ const { Post, User, Comment } = require('../../models');
 const sequelize = require('../..config/connection');
 const withAuth = require('../../utils/auth.js');
 const { route } = require('express/lib/application');
+const req = require('express/lib/request');
 
 // get all users
 router.get('/', (req, res) => {
@@ -115,5 +116,18 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 router.delete('/:id', withAuth, (reg, res) => {
-    
-})
+    Post.destroy({
+        where: {
+            id: req.param.id
+        }
+    })
+      .then(dbPostData => {
+          if (!dbPostData) {
+              res.status(404).json({ message: 'No post found with this id' });
+              return
+          }
+          res.json(dbPostData);
+         });
+});
+
+module.exports = router;
