@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const req = require('express/lib/request');
-const res = require('express/lib/response');
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -118,3 +116,8 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
+
+// PUT /api/users/1
+router.put('/:id', withAuth, (req, res) => {
+    
+})
