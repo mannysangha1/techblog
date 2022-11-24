@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const req = require('express/lib/request');
+const res = require('express/lib/response');
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -106,3 +108,6 @@ router.post('/login', (req, res) => {
 });
 
 
+router.post('/logout', (req, res) => {
+   
+})
