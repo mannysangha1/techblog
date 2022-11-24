@@ -30,4 +30,14 @@ router.get('/', withAuth, (req, res) => {
             }
         ]
     })
-})
+    .then(dbPostData => {
+        // Seralize data before passing to template
+        const posts = dbPostData.map(post => post.get({ plain: true }));
+        res.render('dashboard', { posts, loggedIn: true });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
